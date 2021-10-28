@@ -4,6 +4,9 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <PackageId>YouTube Viewers</PackageId>
+    <Authors>SingletonSean</Authors>
+    <AssemblyName>YouTube Viewers</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
