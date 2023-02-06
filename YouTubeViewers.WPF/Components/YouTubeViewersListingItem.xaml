@@ -30,7 +30,7 @@
                     Visibility="{Binding HasErrorMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
             </StackPanel>
 
-            <Grid Grid.Column="1" Margin="10 0 0 0">
+            <Grid Grid.Column="1" Margin="10,0,0,0">
                 <Grid>
                     <Grid.Style>
                         <Style TargetType="Grid">
@@ -71,7 +71,7 @@
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="#f0f0f0" />
                                         <Setter Property="Foreground" Value="Black" />
-                                        <Setter Property="Padding" Value="20 10" />
+                                        <Setter Property="Padding" Value="20,10" />
                                         <Setter Property="Cursor" Value="Hand" />
                                         <EventSetter Event="Click" Handler="Button_Click" />
 

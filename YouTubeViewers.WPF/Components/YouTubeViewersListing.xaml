@@ -25,6 +25,7 @@
                     CornerRadius="5" />
 
                 <ListView
+                    AutomationProperties.AutomationId="YouTubeViewersListing"
                     BorderThickness="0"
                     ItemsSource="{Binding YouTubeViewersListingItemViewModels}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -32,12 +33,15 @@
                     SelectionMode="Single">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
+                            <Setter Property="AutomationProperties.AutomationId" Value="{Binding Username, StringFormat={}{0}_YouTubeViewerListingItem}" />
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <local:YouTubeViewersListingItem />
+                            <Grid>
+                                <local:YouTubeViewersListingItem />
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
