@@ -20,8 +20,8 @@ namespace YouTubeViewers.WPF.Test.E2E
             options.AddAdditionalCapability("appWorkingDir", appWorkingDirPath);
         }
 
-        [Setup]
-        public void Setup()
+        [SetUp]
+        public void SetUp()
         {
             driver = new WindowsDriver<WindowsElement>(
                 new Uri("http://127.0.0.1:4723"),
