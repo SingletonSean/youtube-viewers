@@ -11,16 +11,19 @@ namespace YouTubeViewers.WPF.Test.E2E
         string appWorkingDirPath;
         string appPath;
 
-        [Setup]
-        public void Setup()
+        public Tests()
         {
             appWorkingDirPath = Path.GetFullPath(@"..\..\..\..\YouTubeViewers.WPF\bin\Debug\net5.0-windows");
             appPath = Path.Combine(appWorkingDirPath, "ouTube Viewers.exe");
             AppiumOptions options = new AppiumOptions();
             options.AddAdditionalCapability("app", appPath);
             options.AddAdditionalCapability("appWorkingDir", appWorkingDirPath);
+        }
 
-            WindowsDriver<WindowsElement> driver = new WindowsDriver<WindowsElement>(
+        [Setup]
+        public void Setup()
+        {
+            driver = new WindowsDriver<WindowsElement>(
                 new Uri("http://127.0.0.1:4723"),
                 options);
         }
