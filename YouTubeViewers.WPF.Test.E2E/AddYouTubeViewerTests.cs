@@ -5,35 +5,48 @@ namespace YouTubeViewers.WPF.Test.E2E
 {
     public class Tests
     {
+        public WindowsDriver<WindowsElement> driver;
+        readonly AppiumOptions options;
+
+        readonly string appWorkingDirPath;
+        readonly string appPath;
+
+        public Tests()
+        {
+            appWorkingDirPath = Path.GetFullPath(@"..\..\..\..\YouTubeViewers.WPF\bin\Debug\net5.0-windows");
+            appPath = Path.Combine(appWorkingDirPath, "ouTube Viewers.exe");
+            AppiumOptions options = new AppiumOptions();
+            options.AddAdditionalCapability("app", appPath);
+            options.AddAdditionalCapability("appWorkingDir", appWorkingDirPath);
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            driver = new WindowsDriver<WindowsElement>(
+                new Uri("http://127.0.0.1:4723"),
+                options);
+        }
+
         [Test]
         public void ShouldAddYouTubeViewer()
         {
-            AppiumOptions options = new AppiumOptions();
+            driver.FindElementByAccessibilityId("AddYouTubeViewerButton").Click();
 
-            options.AddAdditionalCapability("app", @"C:\Storage\VS Repos\YouTube\YouTubeViewers\YouTubeViewers.WPF\bin\Debug\net5.0-windows\YouTube Viewers.exe");
-            options.AddAdditionalCapability("appWorkingDir", @"C:\Storage\VS Repos\YouTube\YouTubeViewers\YouTubeViewers.WPF\bin\Debug\net5.0-windows");
+            driver.FindElementByAccessibilityId("YouTubeViewerUsernameTextBox").SendKeys("SingletonSean");
+            driver.FindElementByAccessibilityId("YouTubeViewerSubscribedCheckBox").Click();
+            driver.FindElementByAccessibilityId("YouTubeViewerMemberCheckBox").Click();
+            driver.FindElementByAccessibilityId("YouTubeViewerSubmitButton").Click();
 
-            WindowsDriver<WindowsElement> driver = new WindowsDriver<WindowsElement>(
-                new Uri("http://127.0.0.1:4723"),
-                options);
+            WindowsElement addedYouTubeViewerListingItem = driver.FindElementByAccessibilityId("SingletonSean_YouTubeViewerListingItem");
 
-            try
-            {
-                driver.FindElementByAccessibilityId("AddYouTubeViewerButton").Click();
+            Assert.That(addedYouTubeViewerListingItem, Is.Not.Null);
+        }
 
-                driver.FindElementByAccessibilityId("YouTubeViewerUsernameTextBox").SendKeys("SingletonSean");
-                driver.FindElementByAccessibilityId("YouTubeViewerSubscribedCheckBox").Click();
-                driver.FindElementByAccessibilityId("YouTubeViewerMemberCheckBox").Click();
-                driver.FindElementByAccessibilityId("YouTubeViewerSubmitButton").Click();
-
-                WindowsElement addedYouTubeViewerListingItem = driver.FindElementByAccessibilityId("SingletonSean_YouTubeViewerListingItem");
-
-                Assert.That(addedYouTubeViewerListingItem, Is.Not.Null);
-            }
-            finally
-            {
-                driver.Close();
-            }
+        [TearDown]
+        public void TearDown()
+        {
+            driver.Close();
         }
     }
 }
