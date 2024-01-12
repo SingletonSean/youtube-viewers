@@ -6,10 +6,10 @@ namespace YouTubeViewers.WPF.Test.E2E
     public class Tests
     {
         public WindowsDriver<WindowsElement> driver;
-        AppiumOptions options;
+        readonly AppiumOptions options;
 
-        string appWorkingDirPath;
-        string appPath;
+        readonly string appWorkingDirPath;
+        readonly string appPath;
 
         public Tests()
         {
